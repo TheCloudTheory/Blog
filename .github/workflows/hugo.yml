@@ -59,6 +59,7 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
+        working-directory: site
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
