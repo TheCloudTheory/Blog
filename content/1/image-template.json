@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.24.24.22086",
+      "templateHash": "14180609215052813945"
+    }
+  },
+  "parameters": {
+    "parName": {
+      "type": "string"
+    },
+    "parLocation": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "parIdentityName": {
+      "type": "string"
+    },
+    "parLocationSuffix": {
+      "type": "string",
+      "defaultValue": "we"
+    },
+    "parImageName": {
+      "type": "string"
+    },
+    "runSuffix": {
+      "type": "string",
+      "defaultValue": "[utcNow()]"
+    },
+    "parCustomizers": {
+      "type": "array"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.VirtualMachineImages/imageTemplates",
+      "apiVersion": "2023-07-01",
+      "name": "[format('it-{0}-{1}', parameters('parName'), parameters('parLocationSuffix'))]",
+      "location": "[parameters('parLocation')]",
+      "identity": {
+        "userAssignedIdentities": {
+          "[format('{0}', resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', format('uai-{0}-{1}', parameters('parIdentityName'), parameters('parLocationSuffix'))))]": {}
+        }
+      },
+      "properties": {
+        "distribute": [
+          {
+            "location": "[parameters('parLocation')]",
+            "imageId": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/images/{2}', subscription().subscriptionId, resourceGroup().name, parameters('parImageName'))]",
+            "runOutputName": "[format('{0}-{1}', parameters('parImageName'), parameters('runSuffix'))]",
+            "type": "ManagedImage"
+          }
+        ],
+        "source": {
+          "type": "PlatformImage",
+          "publisher": "Canonical",
+          "offer": "0001-com-ubuntu-server-jammy",
+          "sku": "22_04-lts-gen2",
+          "version": "latest"
+        },
+        "customize": "[parameters('parCustomizers')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', format('uai-{0}-{1}', parameters('parIdentityName'), parameters('parLocationSuffix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "apiVersion": "2023-01-31",
+      "name": "[format('uai-{0}-{1}', parameters('parIdentityName'), parameters('parLocationSuffix'))]",
+      "location": "[parameters('parLocation')]"
+    }
+  ]
+}

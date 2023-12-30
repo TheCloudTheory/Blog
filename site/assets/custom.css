@@ -1,0 +1,17 @@
+body, .post-title, h1, h2, h3, h4, h5, h6 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+pre, code {
+    overflow-wrap: break-word;
+    white-space : pre-wrap !important;
+}
+
+code {
+    background-color: #222;
+    color: #fff;
+}
+
+p img {
+    margin: 10px auto;
+}
