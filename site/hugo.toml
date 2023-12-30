@@ -37,7 +37,7 @@ paginatePath = "page"
     description = "Technical blog of The Cloud Theory"
 
     # Favicon file (relative to baseURL - place below static or assets folder)
-    favicon = "favicon.png"
+    # favicon = "favicon.png"
     # Custom css file (relative to baseURL - place below static or assets folder)
     css = "custom.css"
 
