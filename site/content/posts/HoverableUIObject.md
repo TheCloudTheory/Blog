@@ -6,11 +6,12 @@ date: 2023-12-31T08:43:59+01:00
 type: posts
 draft: false
 categories:
-- Javascript
+- Programming
 tags:
 - canvas
 - js
 - game-engine
+- ui
 series:
 - Warp
 ---
