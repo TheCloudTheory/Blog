@@ -4,7 +4,7 @@ slug: buttonseventhandlersandpropertychangednotification
 summary: 'When working on UI in a game engine, one of the challenges is to handle changes to a state of a component. Doing that in proper way is crucial to decouple components and allow yourself to define the whole UI with minimal overhead and quirks. In this blog post, we will discuss how Warp is able to render a few buttons, which can interact with each other.'
 date: 2024-01-01T16:35:11+01:00
 type: posts
-draft: true
+draft: false
 categories:
 - Programming
 tags:
