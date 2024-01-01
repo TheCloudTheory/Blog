@@ -4,11 +4,16 @@
   {{- if $showhead }}
   <div class="navigation-header">
     <div class="pure-menu pure-menu-horizontal">
-      {{- with .Site.Title }}
       <a class="pure-menu-heading pure-menu-link" href="{{ $.Site.Home.RelPermalink }}">
-        {{ . }}
+        {{- with .Site.Params.logo }}
+          {{- if resources.Get . }}
+            {{- $logo := resources.Get . | resources.Fingerprint }}
+            <img src="{{ $logo.RelPermalink }}" alt="{{ . }}" width="200">
+          {{- else if fileExists (path.Join "static" .) }}
+            <img src="{{ $.Site.BaseURL }}{{ . }}" alt="{{ . }}" width="200">
+          {{- end }}
+        {{- end }}
       </a>
-      {{- end }}
       {{- with .Site.Params.subtitle }}
       <ul class="pure-menu-list navigation-header-subtitle">
         <li class="pure-menu-item pure-menu-disabled">
