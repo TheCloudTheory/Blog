@@ -102,6 +102,7 @@ paginatePath = "page"
 
     # Configure main menu entries (header)
     # Currently set to list all taxonomies and posts
+    
     [[menu.main]]
         identifier = "post"
         name = "Posts"
@@ -154,11 +155,11 @@ paginatePath = "page"
         url = "https://www.linkedin.com/in/kamil-mrzyg%C5%82%C3%B3d-31470376/"
         weight = 1
 
-    #[[menu.footer]]
-    #    name = "Slick"
-    #    title = "Theme page on gohugo.io"
-    #    url = "https://themes.gohugo.io/slick"
-    #    weight = 2
+    [[menu.footer]]
+        name = "Privacy policy"
+        title = "Theme page on gohugo.io"
+        url = "/pages/PrivacyPolicy"
+        weight = 2
 
     #[[menu.footer]]
     #    name = "Toor"
