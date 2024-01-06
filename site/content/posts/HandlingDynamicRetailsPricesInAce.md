@@ -259,4 +259,4 @@ if (ShouldTakeMockedData())
 This ensures me, that Retail API query is properly generated and handled - if ACE generates different filter, it cannot be used for that test due to data differences.
 
 ## Summary
-I happy with the whole test redesigning tasks as it allowed me to review existing test cases and introduce proper path for the upcoming `1.4` release of Azure Cost Estimator. There's still lots of things to do (most of the tests need to be ported to a new approach), but the whole change should bring higher quality in overall and let manage test suites in more controlled manner.
+I'm happy with the whole test redesigning tasks, as it allowed me to review existing test cases and introduce proper path for the upcoming `1.4` release of Azure Cost Estimator. There's still lots of things to do (most of the tests need to be ported to a new approach), but the whole change should bring higher quality in overall and let manage test suites in more controlled manner.
