@@ -86,11 +86,12 @@ paginatePath = "page"
     tags = "tags"
     categories = "categories"
     series = "series"
+    pages = "pages"
 
 
 [author]
-    name = "Some Author"
-    email = "mail@example.org"
+    name = "Kamil Mrzygłód"
+    email = "kamil@thecloudtheory.com"
 
 
 [services.rss]
@@ -129,6 +130,13 @@ paginatePath = "page"
         name = "Series"
         title = "All series"
         url = "/series/"
+        weight = 2
+
+    [[menu.main]]
+        identifier = "page"
+        name = "Books"
+        title = "Books"
+        url = "/pages/Books"
         weight = 2
 
 
