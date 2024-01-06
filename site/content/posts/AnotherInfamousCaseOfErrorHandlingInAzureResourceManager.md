@@ -15,7 +15,7 @@ tags:
 series:
 - Insights
 ---
-Azure Resource Manager is quite infamous for its error handling, especially when working with managed services, which abstract away lots of underlying infrastructure. You may deploy the simplest template possible, and still be stuck for hours because the error is just **500 Internal Server Error**. In such cases, you may either contact support (what's ) or just try to ask Google / SO / ChatGPT. The former is going to take days unless you have a dedicated, premium support plan. The latter is just a plain luck. As the last resort, you can just try to debug the problem by yourself. Unfortunately, the last option is what works the best for most of the problems I faced.
+Azure Resource Manager is quite infamous for its error handling, especially when working with managed services, which abstract away lots of underlying infrastructure. You may deploy the simplest template possible, and still be stuck for hours because the error is just **500 Internal Server Error**. In such cases, you may either contact support or just try to ask Google / SO / ChatGPT. The former is going to take days unless you have a dedicated, premium support plan. The latter is just a plain luck. As the last resort, you can just try to debug the problem by yourself. Unfortunately, the last option is what works the best for most of the problems I faced.
 
 Let's see how "helpful" Azure Resource Manager can be using Azure VM Image Builder as example.
 
@@ -129,7 +129,7 @@ az resource create \
   --resource-type Microsoft.VirtualMachineImages/imageTemplates \
   -n helloImageTemplateWin01
 ```
-This will work, but to me it's just too imperative and too clumsy. I much prefer a declarative approach with ARM Templates or Bicep, hence let's try to translate the example to something much more useful.
+This will work, but to me, it's just too imperative and too clumsy. Personally, I much prefer a declarative approach with ARM Templates or Bicep, hence let's try to translate the example to something much more useful.
 
 ### Writing a template
 In order to make deployments of image templates, used by Azure VM Image Builder, much more flexible, we can create a template using ARM Templates or Bicep. An example template could look like this:
@@ -216,14 +216,14 @@ Now, creating a deployment using e.g. Azure CLI will end up with the following e
 The problem is, that the error itself is quite vague - it doesn't tell us which resource is actually invalid. Instead, it provides some information about location of invalid object, but as we're using Azure Bicep, this information is still useless. Additional challenge when debugging such error is the fact, that it happens _before_ deployment is created. This simply means, that we cannot easily check the generated JSON and need to build it manually.
 
 ## Building ARM template from Bicep file
-Bicep CLI comes with some additional and useful feature. One of those is Bicep to ARM Template transpilation, which can be performed using the following command:
+Bicep CLI comes with some additional and useful feature. One of those is Bicep to ARM Template compilation, which can be performed using the following command:
 ```
 az bicep build --file <file-path> // Azure CLI
 bicep build --file <file-path> // Bicep CLI
 ```
 When one of those commands completes, it'll create a generated ARM Template based on your Bicep file. Once you access it, you'll notice, that the line number reported in the error message, may be actually useful:
 ![transpiled_bicep_file](/images/1_1.PNG)
-This wasn't so bad! One additional step and we're already able to spot an error. However, what will happen if we complicate our deployment by using another scope?
+This wasn't so bad! One additional step, and we're already able to spot an error. However, what will happen if we complicate our deployment by using another scope?
 
 ## Deploying on a subscription level
 With Azure Resource Manager you have a couple of different deployment scopes at your service. In the previous section we used a default scope (resource group), which is a quite common scenario used in both small and big projects. Changing the scope affects both the way how we write code for infrastructure and how deployments are performed technically. If we decide, that we deploy our code on e.g. a subscription level, we need to redesign it:
@@ -272,7 +272,7 @@ The error will be quite different:
     "message": "Deployment template parse failed: 'Required property 'type' not found in JSON. Path '', line 1, position 1524.'."
 }
 ```
-This time the error returned points to the very first line of underlying JSON object, so we're unable to find the exact spot where it happened. Transpiling Bicep file also won't help here because we don't have a line number to refer to. Even removing whitespaces from the generated JSON isn't helpful - it's actually impossible to tell where exactly the error occurs.
+This time the error returned points to the very first line of underlying JSON object, so we're unable to find the exact spot where it happened. Compiling Bicep file also won't help here because we don't have a line number to refer to. Even removing white-spaces from the generated JSON isn't helpful - it's actually impossible to tell where exactly the error occurs.
 
 ### arm-ttk for the rescue?
 To somehow mitigate the problem of incorrectly reporting an error in the template I tried to validate it using [arm-ttk](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/test-toolkit). Unfortunately test results still inform us, that the template is correct:
