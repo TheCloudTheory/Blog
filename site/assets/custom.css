@@ -15,3 +15,9 @@ code {
 p img {
     margin: 10px auto;
 }
+
+li.cc-info {
+    opacity: .5;
+    font-size: 12px;
+    padding-top: 5px;
+}
