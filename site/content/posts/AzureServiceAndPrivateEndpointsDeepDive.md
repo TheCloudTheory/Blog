@@ -4,7 +4,7 @@ slug: azure-service-endpoints-and-private-endpoints-deep-dive-1-2
 summary: 'When it comes to networking in Azure, one of the most confusing (for many) concepts are Service and Private Endpoints. As personally I always find them a little bit tricky, I decided to do a deep dive with examples. In this blog post, I am going to explain all the differences and see, how many differences are really between them.'
 date: 2024-01-26T20:33:43+01:00
 type: posts
-draft: true
+draft: false
 categories:
 - Azure
 tags:
