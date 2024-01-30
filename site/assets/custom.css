@@ -21,3 +21,9 @@ li.cc-info {
     font-size: 12px;
     padding-top: 5px;
 }
+
+blockquote {
+    background-color: #dcdfb3;
+    padding: 2px;
+    padding-left: 10px;
+}
